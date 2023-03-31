@@ -1,26 +1,31 @@
 import './App.css';
-import Button from './Button';
-import React from 'react';
 
-const themes = {
-  'dark':{
-    backgroundColor: 'black',
-    color: 'white'
-  },
-  'light':{
-    backgroundColor: 'white',
-    color: 'black'
-  }
-}
-export const ThemeContext = React.createContext();
+import React, { useState } from 'react';
+import Form from './Form';
+import MainInfo from './MainInfo';
+import Skills from './Skills';
+
+export const FormContext = React.createContext();
 
 function App() {
+  const [email, setEmail] = useState("hola@gmail.com");
+  const [password, setPassword] = useState("");
+  const [likes, setLikes] = useState("");
+
   return (
     <div>
-      <ThemeContext.Provider value={ themes.dark }>
-      <Button />
-      </ThemeContext.Provider>
-      
+    
+      <form>
+        <FormContext.Provider value={{email,password,likes, setEmail, setLikes, setPassword}} >
+          <MainInfo />
+          <Skills />
+        </FormContext.Provider>
+        <div>
+          <p>Email: {email}</p>
+          <p>Contraseña: {password}</p>
+          <p>Lenguajes: {likes}</p>
+        </div>
+      </form>
     </div>
   );
 }
